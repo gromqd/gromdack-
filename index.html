@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐉 Pet Farm</title>
+    <title>🐉 Magic Pets</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,20 +12,27 @@
         <!-- Шапка -->
         <header class="header">
             <div class="user-info">
-                <img id="user-photo" src="https://via.placeholder.com/32" alt="Avatar">
+                <div class="user-avatar">
+                    <img id="user-photo" src="https://via.placeholder.com/40" alt="Avatar">
+                    <div class="online-dot"></div>
+                </div>
                 <div class="user-text">
-                    <div id="user-name" class="user-name">Player</div>
-                    <div class="user-id">ID: <span id="user-id">0000</span></div>
+                    <div id="user-name" class="user-name">Игрок</div>
+                    <div class="user-level">Уровень <span id="user-level">1</span></div>
                 </div>
             </div>
             <div class="currencies">
                 <div class="currency" data-currency="grains">
-                    <span>🌾</span>
-                    <span id="grains-amount">1000</span>
+                    <div class="currency-icon">🌾</div>
+                    <div class="currency-amount" id="grains-amount">1,000</div>
+                </div>
+                <div class="currency" data-currency="gromd">
+                    <div class="currency-icon">💎</div>
+                    <div class="currency-amount" id="gromd-amount">0</div>
                 </div>
                 <div class="currency" data-currency="stars">
-                    <span>⭐</span>
-                    <span id="stars-amount">100</span>
+                    <div class="currency-icon">⭐</div>
+                    <div class="currency-amount" id="stars-amount">100</div>
                 </div>
             </div>
         </header>
@@ -34,65 +41,117 @@
         <main class="main-content">
             <!-- Экран питомца -->
             <div id="pet-screen" class="screen active">
-                <div class="pet-card">
-                    <div class="pet-header">
-                        <div class="pet-level">Lv.<span id="pet-level">1</span></div>
-                        <div class="pet-rarity rarity-common" id="pet-rarity">Common</div>
-                    </div>
-                    
-                    <div class="pet-image-container">
-                        <div class="pet-image-wrapper">
-                            <img id="pet-image" src="https://via.placeholder.com/150/667eea/ffffff?text=🐉" alt="Pet">
-                        </div>
-                    </div>
+                <div class="pet-container">
+                    <!-- Стрелка влево -->
+                    <button class="nav-arrow nav-arrow-left" id="prev-pet">
+                        <div class="arrow-icon">‹</div>
+                    </button>
 
-                    <div class="pet-name" id="pet-name">Огненный дракон</div>
-                    
-                    <div class="pet-stats">
-                        <div class="stat">
-                            <span class="stat-label">Сытость:</span>
-                            <div class="satiety-bar">
-                                <div class="satiety-fill" id="satiety-fill" style="width: 100%"></div>
-                                <span class="satiety-text" id="satiety-text">100/100</span>
+                    <!-- Карточка питомца -->
+                    <div class="pet-card">
+                        <div class="pet-header">
+                            <div class="pet-badge level-badge">
+                                <span class="badge-icon">⭐</span>
+                                <span class="badge-text">Ур. <span id="pet-level">1</span></span>
+                            </div>
+                            <div class="pet-badge rarity-badge" id="pet-rarity-badge">
+                                <span class="badge-text" id="pet-rarity">Common</span>
                             </div>
                         </div>
-                        <div class="stat">
-                            <span class="stat-label">Фарм:</span>
-                            <span class="stat-value" id="farm-rate">50 зёрен/5мин</span>
+
+                        <div class="pet-visual">
+                            <div class="pet-image-container">
+                                <img id="pet-image" src="https://via.placeholder.com/200/667eea/ffffff?text=🐉" alt="Pet" class="pet-image">
+                                <div class="pet-glow"></div>
+                                <div class="particles-container" id="particles-container"></div>
+                            </div>
                         </div>
-                        <div class="stat">
-                            <span class="stat-label">Зёрен собрано:</span>
-                            <span class="stat-value" id="grains-earned">0</span>
+
+                        <div class="pet-name" id="pet-name">Огненный дракон</div>
+
+                        <div class="pet-stats">
+                            <div class="stat-bar">
+                                <div class="stat-label">
+                                    <span class="stat-icon">🍗</span>
+                                    <span>Сытость</span>
+                                </div>
+                                <div class="stat-value">
+                                    <div class="satiety-bar">
+                                        <div class="satiety-fill" id="satiety-fill"></div>
+                                        <div class="satiety-glow"></div>
+                                        <span class="satiety-text" id="satiety-text">50/100</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-row">
+                                <div class="stat-item">
+                                    <span class="stat-icon">🌾</span>
+                                    <span class="stat-text">Фарм:</span>
+                                    <span class="stat-value" id="farm-rate">50/5мин</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-icon">📦</span>
+                                    <span class="stat-text">Собрано:</span>
+                                    <span class="stat-value" id="grains-earned">0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pet-actions">
+                            <button id="feed-btn" class="action-btn btn-feed">
+                                <div class="btn-content">
+                                    <div class="btn-icon">🍖</div>
+                                    <div class="btn-text">Покормить</div>
+                                    <div class="btn-cost" id="feed-cost">100 зёрен</div>
+                                </div>
+                                <div class="btn-effect"></div>
+                            </button>
+                            
+                            <button id="breed-btn" class="action-btn btn-breed disabled" disabled>
+                                <div class="btn-content">
+                                    <div class="btn-icon">❤️</div>
+                                    <div class="btn-text">Размножить</div>
+                                    <div class="btn-desc" id="breed-desc">(ур. 2+)</div>
+                                </div>
+                                <div class="btn-effect"></div>
+                            </button>
                         </div>
                     </div>
 
-                    <div class="pet-actions">
-                        <button id="feed-btn" class="action-btn btn-primary">
-                            <span class="btn-icon">🍖</span>
-                            <span class="btn-text">Покормить</span>
-                            <span class="btn-cost" id="feed-cost">100 зёрен</span>
-                        </button>
-                        <button id="breed-btn" class="action-btn btn-secondary disabled" disabled>
-                            <span class="btn-icon">❤️</span>
-                            <span class="btn-text">Размножить</span>
-                            <span class="btn-desc">(доступно с 5 ур.)</span>
-                        </button>
-                    </div>
+                    <!-- Стрелка вправо -->
+                    <button class="nav-arrow nav-arrow-right" id="next-pet">
+                        <div class="arrow-icon">›</div>
+                    </button>
                 </div>
             </div>
 
             <!-- Инвентарь -->
             <div id="inventory-screen" class="screen">
-                <div class="screen-title">🎒 Инвентарь</div>
-                <div class="tabs">
-                    <button class="tab-btn active" data-tab="pets">Питомцы (<span id="pets-count">1</span>)</button>
-                    <button class="tab-btn" data-tab="accessories">Аксессуары (<span id="accessories-count">0</span>)</button>
+                <div class="screen-header">
+                    <div class="screen-title">🎒 Инвентарь</div>
+                    <div class="screen-subtitle">Ваши питомцы и аксессуары</div>
                 </div>
+                
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="pets">
+                        <span class="tab-icon">🐉</span>
+                        <span class="tab-text">Питомцы</span>
+                        <span class="tab-badge" id="pets-count">1</span>
+                    </button>
+                    <button class="tab-btn" data-tab="accessories">
+                        <span class="tab-icon">👑</span>
+                        <span class="tab-text">Аксессуары</span>
+                        <span class="tab-badge" id="accessories-count">0</span>
+                    </button>
+                </div>
+                
                 <div class="tab-content active" id="pets-tab">
                     <div class="items-grid" id="pets-grid">
                         <!-- Питомцы появятся здесь -->
                     </div>
                 </div>
+                
                 <div class="tab-content" id="accessories-tab">
                     <div class="items-grid" id="accessories-grid">
                         <!-- Аксессуары появятся здесь -->
@@ -102,59 +161,93 @@
 
             <!-- Рынок -->
             <div id="market-screen" class="screen">
-                <div class="screen-title">📈 Рынок</div>
+                <div class="screen-header">
+                    <div class="screen-title">🏪 Рынок</div>
+                    <div class="screen-subtitle">Покупайте и продавайте</div>
+                </div>
+                
                 <div class="tabs">
-                    <button class="tab-btn active" data-tab="market-pets">Питомцы</button>
-                    <button class="tab-btn" data-tab="market-accessories">Аксессуары</button>
+                    <button class="tab-btn active" data-tab="market-pets">
+                        <span class="tab-icon">🐉</span>
+                        <span class="tab-text">Питомцы</span>
+                    </button>
+                    <button class="tab-btn" data-tab="market-accessories">
+                        <span class="tab-icon">🎩</span>
+                        <span class="tab-text">Аксессуары</span>
+                    </button>
                 </div>
-                <div class="tab-content active" id="market-pets-tab">
-                    <div class="market-items" id="market-pets-list">
-                        <!-- Питомцы на рынке -->
+                
+                <div class="market-content">
+                    <div class="tab-content active" id="market-pets-tab">
+                        <div class="coming-soon">
+                            <div class="coming-soon-icon">🔮</div>
+                            <div class="coming-soon-title">Рынок питомцев</div>
+                            <div class="coming-soon-text">Скоро можно будет покупать и продавать питомцев</div>
+                        </div>
                     </div>
-                </div>
-                <div class="tab-content" id="market-accessories-tab">
-                    <div class="market-items" id="market-accessories-list">
-                        <!-- Аксессуары на рынке -->
+                    
+                    <div class="tab-content" id="market-accessories-tab">
+                        <div class="coming-soon">
+                            <div class="coming-soon-icon">🛍️</div>
+                            <div class="coming-soon-title">Рынок аксессуаров</div>
+                            <div class="coming-soon-text">Торгуйте аксессуарами для питомцев</div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Кошелек -->
             <div id="wallet-screen" class="screen">
-                <div class="screen-title">💰 Кошелек</div>
+                <div class="screen-header">
+                    <div class="screen-title">💰 Кошелек</div>
+                    <div class="screen-subtitle">Управление валютами</div>
+                </div>
+                
                 <div class="wallet-container">
-                    <div class="main-currency">
-                        <div class="currency-icon">💎</div>
+                    <div class="main-currency-card">
+                        <div class="currency-glow"></div>
+                        <div class="currency-icon-large">💎</div>
                         <div class="currency-info">
                             <div class="currency-name">GROMD</div>
-                            <div class="currency-amount" id="wallet-gromd">0</div>
+                            <div class="currency-amount-large" id="wallet-gromd">0</div>
+                            <div class="currency-change">+0%</div>
                         </div>
                     </div>
                     
                     <div class="other-currencies">
-                        <div class="currency-item">
-                            <span class="currency-icon">🌾</span>
-                            <span class="currency-name">Зёрна</span>
-                            <span class="currency-amount" id="wallet-grains">1000</span>
+                        <div class="currency-card">
+                            <div class="currency-icon">🌾</div>
+                            <div class="currency-details">
+                                <div class="currency-name">Зёрна</div>
+                                <div class="currency-amount" id="wallet-grains">1,000</div>
+                            </div>
                         </div>
-                        <div class="currency-item">
-                            <span class="currency-icon">⚡</span>
-                            <span class="currency-name">TON</span>
-                            <span class="currency-amount" id="wallet-ton">0</span>
+                        
+                        <div class="currency-card">
+                            <div class="currency-icon">⚡</div>
+                            <div class="currency-details">
+                                <div class="currency-name">TON</div>
+                                <div class="currency-amount" id="wallet-ton">0</div>
+                            </div>
                         </div>
-                        <div class="currency-item">
-                            <span class="currency-icon">⭐</span>
-                            <span class="currency-name">Звёзды</span>
-                            <span class="currency-amount" id="wallet-stars">100</span>
+                        
+                        <div class="currency-card">
+                            <div class="currency-icon">⭐</div>
+                            <div class="currency-details">
+                                <div class="currency-name">Звёзды</div>
+                                <div class="currency-amount" id="wallet-stars">100</div>
+                            </div>
                         </div>
                     </div>
-
+                    
                     <div class="wallet-actions">
-                        <button id="exchange-btn" class="action-btn btn-primary">
-                            🔄 Обменять валюты
+                        <button id="exchange-btn" class="wallet-action-btn btn-exchange">
+                            <span class="btn-icon">🔄</span>
+                            <span class="btn-text">Обменять</span>
                         </button>
-                        <button id="withdraw-btn" class="action-btn btn-secondary disabled" disabled>
-                            🏦 Вывести (скоро)
+                        <button id="withdraw-btn" class="wallet-action-btn btn-withdraw disabled" disabled>
+                            <span class="btn-icon">🏦</span>
+                            <span class="btn-text">Вывести</span>
                         </button>
                     </div>
                 </div>
@@ -164,33 +257,63 @@
         <!-- Нижнее меню -->
         <nav class="bottom-nav">
             <button class="nav-btn active" data-screen="pet-screen">
-                <span class="nav-icon">🏠</span>
-                <span class="nav-text">Дом</span>
+                <div class="nav-icon">🏠</div>
+                <div class="nav-text">Дом</div>
+                <div class="nav-indicator"></div>
             </button>
             <button class="nav-btn" data-screen="inventory-screen">
-                <span class="nav-icon">🎒</span>
-                <span class="nav-text">Инвентарь</span>
+                <div class="nav-icon">🎒</div>
+                <div class="nav-text">Инвентарь</div>
+                <div class="nav-indicator"></div>
             </button>
             <button class="nav-btn" data-screen="market-screen">
-                <span class="nav-icon">📈</span>
-                <span class="nav-text">Рынок</span>
+                <div class="nav-icon">🏪</div>
+                <div class="nav-text">Рынок</div>
+                <div class="nav-indicator"></div>
             </button>
             <button class="nav-btn" data-screen="wallet-screen">
-                <span class="nav-icon">💰</span>
-                <span class="nav-text">Кошелек</span>
+                <div class="nav-icon">💰</div>
+                <div class="nav-text">Кошелек</div>
+                <div class="nav-indicator"></div>
             </button>
         </nav>
 
         <!-- Админ панель -->
+        <button id="admin-btn" class="admin-btn">
+            <div class="admin-icon">⚙️</div>
+        </button>
+        
         <div id="admin-panel" class="admin-panel hidden">
-    <div class="admin-header">Админ панель</div>
-    <button id="view-players-btn" class="admin-action-btn">👥 Игроки</button>
-    <button id="add-currency-btn" class="admin-action-btn">💰 Добавить валюту</button>
-    <!-- НОВАЯ КНОПКА -->
-    <button id="fast-grow-btn" class="admin-action-btn">🚀 Быстрый рост</button>
-    <button id="reset-game-btn" class="admin-action-btn">🔄 Сбросить игру</button>
-    <button id="logout-admin-btn" class="admin-action-btn">🚪 Выйти</button>
-</div>
+            <div class="admin-header">
+                <div class="admin-title">Админ панель</div>
+                <div class="admin-subtitle">Управление игрой</div>
+            </div>
+            
+            <div class="admin-actions">
+                <button id="view-players-btn" class="admin-action-btn">
+                    <span class="admin-action-icon">👥</span>
+                    <span class="admin-action-text">Игроки</span>
+                </button>
+                
+                <button id="add-currency-btn" class="admin-action-btn">
+                    <span class="admin-action-icon">💰</span>
+                    <span class="admin-action-text">Добавить валюту</span>
+                </button>
+                
+                <button id="fast-grow-btn" class="admin-action-btn">
+                    <span class="admin-action-icon">🚀</span>
+                    <span class="admin-action-text">Быстрый рост</span>
+                </button>
+                
+                <button id="reset-game-btn" class="admin-action-btn">
+                    <span class="admin-action-icon">🔄</span>
+                    <span class="admin-action-text">Сбросить игру</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Эффекты -->
+        <div id="effects-container"></div>
     </div>
 
     <script src="config.js"></script>

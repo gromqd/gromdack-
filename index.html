@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Farm Game</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Шапка с информацией о пользователе -->
+        <header class="header">
+            <div class="user-info">
+                <img id="user-photo" src="" alt="User Photo">
+                <span id="user-name">User</span>
+                <div class="user-id">#<span id="user-id">0000</span></div>
+            </div>
+            <div class="currencies">
+                <div class="currency" data-currency="grains">
+                    <span>🌾</span>
+                    <span id="grains-amount">0</span>
+                </div>
+                <div class="currency" data-currency="gromd">
+                    <span>💎</span>
+                    <span id="gromd-amount">0</span>
+                </div>
+                <div class="currency" data-currency="ton">
+                    <span>⚡</span>
+                    <span id="ton-amount">0</span>
+                </div>
+                <div class="currency" data-currency="stars">
+                    <span>⭐</span>
+                    <span id="stars-amount">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Основной контент -->
+        <main class="main-content">
+            <!-- Экран питомца -->
+            <div id="pet-screen" class="screen active">
+                <div class="pet-card">
+                    <div class="pet-image-container">
+                        <img id="pet-image" src="" alt="Pet">
+                        <div class="pet-level">Lv.<span id="pet-level">1</span></div>
+                        <div class="pet-rarity" id="pet-rarity">Common</div>
+                    </div>
+                    <div class="pet-info">
+                        <div class="satiety-bar">
+                            <div class="satiety-fill" id="satiety-fill"></div>
+                            <span class="satiety-text" id="satiety-text">100/100</span>
+                        </div>
+                        <div class="earnings">Зёрен собрано: <span id="grains-earned">0</span></div>
+                    </div>
+                    <button id="feed-btn" class="action-btn">Покормить</button>
+                    <button id="breed-btn" class="action-btn disabled" disabled>Размножить</button>
+                </div>
+            </div>
+
+            <!-- Экран инвентаря -->
+            <div id="inventory-screen" class="screen">
+                <div class="inventory-tabs">
+                    <button class="tab-btn active" data-tab="pets">Питомцы</button>
+                    <button class="tab-btn" data-tab="accessories">Аксессуары</button>
+                </div>
+                <div class="inventory-content">
+                    <div id="pets-tab" class="tab-content active"></div>
+                    <div id="accessories-tab" class="tab-content"></div>
+                </div>
+            </div>
+
+            <!-- Экран рынка -->
+            <div id="market-screen" class="screen">
+                <div class="market-tabs">
+                    <button class="tab-btn active" data-tab="market-pets">Питомцы</button>
+                    <button class="tab-btn" data-tab="market-accessories">Аксессуары</button>
+                </div>
+                <div class="market-content">
+                    <div id="market-pets-tab" class="tab-content active"></div>
+                    <div id="market-accessories-tab" class="tab-content"></div>
+                </div>
+            </div>
+
+            <!-- Экран кошелька -->
+            <div id="wallet-screen" class="screen">
+                <div class="wallet-main">
+                    <div class="main-currency" id="main-currency-display">
+                        <span>💎</span>
+                        <span id="main-gromd">0</span>
+                        <span>GROMD</span>
+                    </div>
+                    <div class="other-currencies">
+                        <div class="currency-wallet">
+                            <span>🌾</span>
+                            <span id="wallet-grains">0</span>
+                            <span>Зёрна</span>
+                        </div>
+                        <div class="currency-wallet">
+                            <span>⚡</span>
+                            <span id="wallet-ton">0</span>
+                            <span>TON</span>
+                        </div>
+                        <div class="currency-wallet">
+                            <span>⭐</span>
+                            <span id="wallet-stars">0</span>
+                            <span>Звёзды</span>
+                        </div>
+                    </div>
+                    <button id="exchange-btn" class="action-btn">Обменять валюты</button>
+                    <button id="withdraw-btn" class="action-btn disabled" disabled>Вывести</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Нижнее меню -->
+        <nav class="bottom-nav">
+            <button class="nav-btn active" data-screen="pet-screen">🏠</button>
+            <button class="nav-btn" data-screen="inventory-screen">🎒</button>
+            <button class="nav-btn" data-screen="market-screen">📈</button>
+            <button class="nav-btn" data-screen="wallet-screen">💰</button>
+        </nav>
+
+        <!-- Админ панель (только для админа) -->
+        <div id="admin-btn" class="admin-btn">⚙️</div>
+        <div id="admin-panel" class="admin-panel hidden">
+            <h3>Админ панель</h3>
+            <button id="view-players-btn">Просмотр игроков</button>
+            <button id="reset-game-btn">Сбросить развитие</button>
+            <button id="logout-admin-btn">Выйти</button>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

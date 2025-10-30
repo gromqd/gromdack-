@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кошелёк - Pet Game</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <button class="back-button" id="back-btn">← Назад</button>
+            <h2>💰 Кошелёк</h2>
+        </header>
+
+        <main class="wallet-content">
+            <!-- Основная валюта -->
+            <div class="main-currency">
+                <div class="currency-large" id="main-currency">
+                    <span class="currency-icon">⚡</span>
+                    <span class="currency-amount" id="gromd-main">0.00</span>
+                    <span class="currency-name">GROMD</span>
+                </div>
+            </div>
+
+            <!-- Остальные валюты -->
+            <div class="other-currencies">
+                <div class="currency-item large">
+                    <span class="currency-icon">🌾</span>
+                    <div class="currency-info">
+                        <span class="currency-amount" id="grain-wallet">0</span>
+                        <span class="currency-name">Зёрна</span>
+                    </div>
+                </div>
+                
+                <div class="currency-item large">
+                    <span class="currency-icon">💎</span>
+                    <div class="currency-info">
+                        <span class="currency-amount" id="ton-wallet">0.0</span>
+                        <span class="currency-name">TON</span>
+                    </div>
+                </div>
+                
+                <div class="currency-item large">
+                    <span class="currency-icon">⭐</span>
+                    <div class="currency-info">
+                        <span class="currency-amount" id="stars-wallet">0</span>
+                        <span class="currency-name">Звёзды</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Обмен валют -->
+            <div class="exchange-section">
+                <h3>💱 Обмен валют</h3>
+                
+                <div class="exchange-item">
+                    <div class="exchange-from">
+                        <span>⭐ Звёзды → 🌾 Зёрна</span>
+                        <small>Курс: 1 ⭐ = 5 🌾</small>
+                    </div>
+                    <div class="exchange-controls">
+                        <input type="number" id="stars-to-grain" min="1" max="100" value="1">
+                        <button class="exchange-btn" data-from="stars" data-to="grain" data-rate="5">
+                            Обменять
+                        </button>
+                    </div>
+                </div>
+
+                <div class="exchange-item">
+                    <div class="exchange-from">
+                        <span>💎 TON → 🌾 Зёрна</span>
+                        <small>Курс: 0.1 TON = 400 🌾</small>
+                    </div>
+                    <div class="exchange-controls">
+                        <input type="number" id="ton-to-grain" min="0.1" max="10" step="0.1" value="0.1">
+                        <button class="exchange-btn" data-from="ton" data-to="grain" data-rate="4000">
+                            Обменять
+                        </button>
+                    </div>
+                </div>
+
+                <div class="exchange-item">
+                    <div class="exchange-from">
+                        <span>💎 TON → ⭐ Звёзды</span>
+                        <small>Курс: 0.1 TON = 30 ⭐</small>
+                    </div>
+                    <div class="exchange-controls">
+                        <input type="number" id="ton-to-stars" min="0.1" max="10" step="0.1" value="0.1">
+                        <button class="exchange-btn" data-from="ton" data-to="stars" data-rate="300">
+                            Обменять
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кнопка вывода -->
+            <div class="withdraw-section">
+                <button class="withdraw-button" id="withdraw-btn" disabled>
+                    🚫 Вывод временно недоступен
+                </button>
+                <small class="withdraw-note">
+                    Вывод GROMD будет доступен после airdrop
+                </small>
+            </div>
+
+            <!-- Статистика -->
+            <div class="wallet-stats">
+                <h3>📊 Статистика</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-value" id="total-pets">0</span>
+                        <span class="stat-label">Питомцев</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="total-accessories">0</span>
+                        <span class="stat-label">Аксессуаров</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="total-gromd">0</span>
+                        <span class="stat-label">Всего GROMD</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="play-time">0д</span>
+                        <span class="stat-label">В игре</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="wallet.js"></script>
+</body>
+</html>

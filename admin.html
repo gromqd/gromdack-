@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель - Pet Game</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <button class="back-button" id="back-btn">← Назад</button>
+            <h2>⚙️ Админ-панель</h2>
+        </header>
+
+        <div class="admin-tabs">
+            <button class="tab-btn active" data-tab="users">👥 Игроки</button>
+            <button class="tab-btn" data-tab="security">🚨 Безопасность</button>
+            <button class="tab-btn" data-tab="system">🔧 Система</button>
+        </div>
+
+        <main class="admin-content">
+            <!-- Управление игроками -->
+            <div class="tab-content active" id="users-tab">
+                <div class="search-box">
+                    <input type="text" id="user-search" placeholder="🔍 Поиск по ID или имени...">
+                    <button id="search-btn">Найти</button>
+                </div>
+                
+                <div class="users-list" id="users-list">
+                    <!-- Список игроков будет добавляться динамически -->
+                </div>
+            </div>
+
+            <!-- Безопасность -->
+            <div class="tab-content" id="security-tab">
+                <div class="security-stats">
+                    <h3>📊 Статистика безопасности</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-value" id="total-users">0</span>
+                            <span class="stat-label">Всего игроков</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="suspicious-users">0</span>
+                            <span class="stat-label">Подозрительные</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value" id="banned-users">0</span>
+                            <span class="stat-label">Заблокированы</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-logs">
+                    <h3>📝 Последние события</h3>
+                    <div class="logs-list" id="security-logs">
+                        <!-- Логи безопасности -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Система -->
+            <div class="tab-content" id="system-tab">
+                <div class="system-actions">
+                    <h3>⚡ Быстрые действия</h3>
+                    <button class="action-btn danger" id="reset-all-btn">
+                        🗑️ Сбросить ВСЕ данные
+                    </button>
+                    <button class="action-btn" id="add-currency-btn">
+                        💰 Добавить валюту тестерам
+                    </button>
+                    <button class="action-btn" id="export-data-btn">
+                        📤 Экспорт данных
+                    </button>
+                </div>
+
+                <div class="system-info">
+                    <h3>ℹ️ Информация о системе</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span>Версия игры:</span>
+                            <span>1.0.0</span>
+                        </div>
+                        <div class="info-item">
+                            <span>Всего питомцев:</span>
+                            <span id="total-pets-admin">0</span>
+                        </div>
+                        <div class="info-item">
+                            <span>Всего аксессуаров:</span>
+                            <span id="total-accessories-admin">0</span>
+                        </div>
+                        <div class="info-item">
+                            <span>Размер данных:</span>
+                            <span id="data-size">0 KB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Модальное окно игрока -->
+        <div class="modal" id="user-modal">
+            <div class="modal-content">
+                <h3 id="user-modal-title">👤 Информация об игроке</h3>
+                <div class="user-details" id="user-details">
+                    <!-- Информация об игроке -->
+                </div>
+                <div class="user-actions">
+                    <button class="action-btn danger" id="ban-user-btn">🚫 Заблокировать</button>
+                    <button class="action-btn" id="add-currency-user-btn">💰 Добавить валюту</button>
+                    <button class="action-btn" id="reset-user-btn">🔄 Сбросить прогресс</button>
+                </div>
+                <button class="close-modal" id="close-user-modal">❌ Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

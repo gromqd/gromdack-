@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инвентарь - Pet Game</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <button class="back-button" id="back-btn">← Назад</button>
+            <h2>🎒 Инвентарь</h2>
+        </header>
+
+        <div class="inventory-tabs">
+            <button class="tab-btn active" data-tab="accessories">👕 Аксессуары</button>
+            <button class="tab-btn" data-tab="pets">🐾 Питомцы</button>
+        </div>
+
+        <main class="inventory-content">
+            <!-- Аксессуары -->
+            <div class="tab-content active" id="accessories-tab">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-type="all">Все</button>
+                    <button class="filter-btn" data-type="hat">👒 Головные</button>
+                    <button class="filter-btn" data-type="clothes">👔 Одежда</button>
+                    <button class="filter-btn" data-type="pants">👖 Штаны</button>
+                    <button class="filter-btn" data-type="hand">👜 В руках</button>
+                </div>
+                
+                <div class="items-grid" id="accessories-grid">
+                    <!-- Аксессуары будут добавляться динамически -->
+                </div>
+            </div>
+
+            <!-- Питомцы -->
+            <div class="tab-content" id="pets-tab">
+                <div class="pets-list" id="pets-list">
+                    <!-- Список питомцев будет добавляться динамически -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Модальное окно для одевания аксессуара -->
+        <div class="modal" id="equip-modal">
+            <div class="modal-content">
+                <h3>🎯 Выберите питомца</h3>
+                <div class="pets-selection" id="pets-selection">
+                    <!-- Список питомцев для выбора -->
+                </div>
+                <button class="close-modal" id="close-equip-modal">❌ Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="inventory.js"></script>
+</body>
+</html>

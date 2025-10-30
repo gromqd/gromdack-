@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Game - Выращивай питомцев!</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Шапка с информацией игрока -->
+        <header class="header">
+            <div class="user-info">
+                <img id="user-photo" src="" alt="User Photo" class="user-avatar">
+                <div class="user-details">
+                    <span id="user-name" class="user-name">Игрок</span>
+                    <span class="user-id" id="user-id">ID: 000000</span>
+                </div>
+            </div>
+            <div class="currency-display">
+                <div class="currency-item">
+                    <span>🌾 </span>
+                    <span id="grain-balance">100</span>
+                </div>
+                <div class="currency-item">
+                    <span>⚡ </span>
+                    <span id="gromd-balance">0</span>
+                </div>
+                <div class="currency-item">
+                    <span>💎 </span>
+                    <span id="ton-balance">0</span>
+                </div>
+                <div class="currency-item">
+                    <span>⭐ </span>
+                    <span id="star-balance">10</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Основной экран питомца -->
+        <main class="main-content">
+            <div class="pets-container">
+                <button class="nav-arrow left-arrow" id="prev-pet">‹</button>
+                
+                <div class="pets-carousel" id="pets-carousel">
+                    <!-- Карточки питомцев будут добавляться динамически -->
+                </div>
+                
+                <button class="nav-arrow right-arrow" id="next-pet">›</button>
+            </div>
+
+            <div class="action-buttons">
+                <button class="feed-button" id="feed-btn">
+                    🍖 Покормить (<span id="feed-cost">10</span> зёрен)
+                </button>
+                <button class="inventory-button" id="inventory-btn">🎒 Инвентарь</button>
+                <button class="breed-button" id="breed-btn" disabled>❤️ Размножить</button>
+            </div>
+            
+            <div class="pets-indicator" id="pets-indicator">
+                <!-- Индикаторы будут добавляться динамически -->
+            </div>
+        </main>
+
+        <!-- Нижнее меню -->
+        <nav class="bottom-nav">
+            <button class="nav-btn" data-page="market">🏪 Рынок</button>
+            <button class="nav-btn active" data-page="home">🏠 Дом</button>
+            <button class="nav-btn" data-page="shop">🛍️ Магазин</button>
+            <button class="nav-btn" data-page="wallet">💰 Кошелёк</button>
+        </nav>
+
+        <!-- Скрытая кнопка админа -->
+        <div class="admin-corner" id="admin-corner" style="display: none;"></div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

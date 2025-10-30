@@ -1,0 +1,16 @@
+{
+  "pets": [],
+  "accessories": [],
+  "lastUpdate": 0,
+  "marketStats": {
+    "totalTrades": 0,
+    "totalVolume": 0,
+    "averagePrices": {
+      "common": 100,
+      "uncommon": 300,
+      "rare": 800,
+      "epic": 2000,
+      "legendary": 5000
+    }
+  }
+}

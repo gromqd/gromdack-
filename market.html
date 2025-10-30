@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рынок - Pet Game</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <button class="back-button" id="back-btn">← Назад</button>
+            <h2>🏪 Рынок</h2>
+        </header>
+
+        <div class="market-tabs">
+            <button class="tab-btn active" data-tab="pets">🐾 Питомцы</button>
+            <button class="tab-btn" data-tab="accessories">👕 Аксессуары</button>
+            <button class="tab-btn" data-tab="my-sales">💼 Мои продажи</button>
+        </div>
+
+        <div class="market-filters">
+            <select id="rarity-filter" class="filter-select">
+                <option value="all">Все редкости</option>
+                <option value="common">Обычный</option>
+                <option value="uncommon">Необычный</option>
+                <option value="rare">Редкий</option>
+                <option value="epic">Эпический</option>
+                <option value="legendary">Легендарный</option>
+            </select>
+            
+            <select id="price-filter" class="filter-select">
+                <option value="all">Любая цена</option>
+                <option value="cheap">💰 Дешевые</option>
+                <option value="medium">💵 Средние</option>
+                <option value="expensive">💎 Дорогие</option>
+            </select>
+        </div>
+
+        <main class="market-content">
+            <div class="tab-content active" id="pets-tab">
+                <div class="market-list" id="pets-market">
+                    <!-- Питомцы будут добавляться динамически -->
+                </div>
+            </div>
+
+            <div class="tab-content" id="accessories-tab">
+                <div class="market-list" id="accessories-market">
+                    <!-- Аксессуары будут добавляться динамически -->
+                </div>
+            </div>
+
+            <div class="tab-content" id="my-sales-tab">
+                <div class="my-sales" id="my-sales-list">
+                    <!-- Мои лоты будут добавляться динамически -->
+                </div>
+                <button class="sell-button" id="sell-pet-btn">🐾 Выставить питомца</button>
+                <button class="sell-button" id="sell-accessory-btn">👕 Выставить аксессуар</button>
+            </div>
+        </main>
+
+        <!-- Модальное окно покупки -->
+        <div class="modal" id="buy-modal">
+            <div class="modal-content">
+                <h3 id="buy-title">🛒 Покупка</h3>
+                <div class="buy-item-info" id="buy-item-info">
+                    <!-- Информация о товаре -->
+                </div>
+                <div class="price-chart" id="price-chart">
+                    <!-- График цены -->
+                </div>
+                <div class="buy-options">
+                    <button class="buy-option" data-currency="grain" id="buy-grain-btn">
+                        Купить за <span id="grain-price">0</span> 🌾
+                    </button>
+                    <button class="buy-option" data-currency="stars" id="buy-stars-btn">
+                        Купить за <span id="stars-price">0</span> ⭐
+                    </button>
+                </div>
+                <button class="close-modal" id="close-buy-modal">❌ Отмена</button>
+            </div>
+        </div>
+
+        <!-- Модальное окно продажи -->
+        <div class="modal" id="sell-modal">
+            <div class="modal-content">
+                <h3 id="sell-title">💰 Продажа</h3>
+                <div class="sell-selection" id="sell-selection">
+                    <!-- Выбор предмета для продажи -->
+                </div>
+                <div class="price-settings">
+                    <label>💵 Начальная цена:</label>
+                    <input type="number" id="start-price" min="1" value="100">
+                    <label>💳 Валюта:</label>
+                    <select id="sell-currency">
+                        <option value="grain">🌾 Зёрна</option>
+                        <option value="stars">⭐ Звёзды</option>
+                    </select>
+                </div>
+                <button class="confirm-sell" id="confirm-sell">✅ Выставить на рынок</button>
+                <button class="close-modal" id="close-sell-modal">❌ Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="config.js"></script>
+    <script src="market.js"></script>
+</body>
+</html>
